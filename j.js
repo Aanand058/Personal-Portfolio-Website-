@@ -5,6 +5,7 @@ const app = express();
 const exphbs = require('express-handlebars');
 
 const Sequelize = require("sequelize");
+const DataTypes = require("sequelize");
 
 
 const sequelize = new Sequelize("nxqmjlfo", "nxqmjlfo", "RH6UrzNIF5uWU02-yEG74KyhE6hS5wCJ", {
@@ -23,7 +24,11 @@ const sequelize = new Sequelize("nxqmjlfo", "nxqmjlfo", "RH6UrzNIF5uWU02-yEG74Ky
 
 var User = sequelize.define('Student111', {
     name: Sequelize.STRING,
-    email: Sequelize.STRING
+    email: Sequelize.STRING,
+    created_at: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    }
 });
 
 
@@ -35,7 +40,7 @@ app.use(express.static("./public/"));
 const hbs = exphbs.create({
     helpers: {
         formatDate: function (date) {
-            return date;
+            return date.toLocaleDateString();
         }
     },
     extname: ".hbs"
@@ -56,31 +61,15 @@ app.get('/update-user', (req, res) => {
     User.findAll({
         where: { id: req.query.id }
     }).then(() => {
-        res.render('edit', { users: req.query.id, layout:false });
+        res.render('edit', { users: req.query.id, layout: false });
     });
-   
+
 });
 
 // Update user data in database
 app.post('/update-user', (req, res) => {
-   
 
-    // const name = req.body.name;
-    // const id = req.body.id;
-    // const email = req.body.email;
-    // // Update data into PostgreSQL
-    // pool.query(
-    //     'UPDATE users SET name = $1, email = $2 WHERE id = $3',
-    //     [name, email,id],
-    //     (error, results) => {
-    //         if (error) {
-    //             console.log(error); res.status(500).json({ message: 'Error update data into PostgreSQL' });
-    //         } else {
-    //             res.redirect("/");
-    //         }
-    //     });
 
-    // update a record using the "Name" model with the data from req.body
     User.update({
         name: req.body.name,
         email: req.body.email
@@ -94,7 +83,7 @@ app.post('/update-user', (req, res) => {
 
 // Delete user data in database
 app.get('/delete-user', (req, res) => {
-  
+
 
     User.destroy({
         where: { id: req.query.id }
