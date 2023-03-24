@@ -56,32 +56,19 @@ app.get('/update-user', (req, res) => {
     User.findAll({
         where: { id: req.query.id }
     }).then(() => {
-        res.render('edit', { users: results.rows[0], layout:false });
+        res.render('edit', { users: req.query.id, layout:false });
     });
    
 });
 
 // Update user data in database
 app.post('/update-user', (req, res) => {
-    /*---------------------------------------
-    [TODO] Please complete the implementation
-    to be able to update users in PostgreSQL.
-    Receving three parameters id, name and email
+   
 
-    Using the query:
-    "UPDATE users SET name = $1, email = $2 WHERE id = $3"
-
-    If Failed: Return status code 500 and JSON message:
-    {message: "Error Updating data into PostgreSQL"}
-
-    If succeed:
-    Redirect to root of the website.
-    ----------------------------------------*/
-
-    const name = req.body.name;
-    const id = req.body.id;
-    const email = req.body.email;
-    // Update data into PostgreSQL
+    // const name = req.body.name;
+    // const id = req.body.id;
+    // const email = req.body.email;
+    // // Update data into PostgreSQL
     // pool.query(
     //     'UPDATE users SET name = $1, email = $2 WHERE id = $3',
     //     [name, email,id],
