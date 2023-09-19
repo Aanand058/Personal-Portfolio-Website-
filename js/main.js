@@ -1,16 +1,4 @@
-/*
-Name: Aanand Aman
-Student Id: 166125211
-Email: aaman8@myseneca.ca
-WEB222 Final Assessment
 
-During this Assessment, I tried including js validations which professor taught us but it was only validating
-the phone number and not the postal code simultaneously. So I did some research and found these youtube vidoes and made my 
-code with the help of theese video.
-Links:  https://www.youtube.com/watch?v=In0nB0ABaUk&ab_channel=WebDevSimplified
-        https://www.youtube.com/watch?v=WLUCzSaH5kI&ab_channel=CodeWithHarry
-
-*/
 
 
 //Other Msg Validation
